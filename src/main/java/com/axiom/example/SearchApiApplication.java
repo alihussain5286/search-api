@@ -12,7 +12,6 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import com.axiom.example.entity.Hardware;
 import com.axiom.example.entity.Mobile;
 import com.axiom.example.repository.MobileRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
