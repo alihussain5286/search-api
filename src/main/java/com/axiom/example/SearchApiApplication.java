@@ -1,19 +1,22 @@
 package com.axiom.example;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.axiom.example.entity.Mobile;
-import com.axiom.example.repository.MobileRepository;
+import com.axiom.example.entity.Device;
+import com.axiom.example.repository.DeviceRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,14 +26,15 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 public class SearchApiApplication {
 
 	@Autowired
-	private MobileRepository mobileRepository;
+	private DeviceRepository deviceRepository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SearchApiApplication.class, args);
 	}
 	
-	
-
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
@@ -48,16 +52,8 @@ public class SearchApiApplication {
 	@Bean
 	InitializingBean sendDatabase() {
 		return () ->{
-			Mobile mobile=new Mobile();
-			mobile.setId(new Long(785));
-			mobile.setBrand("Apple");
-			Map<String,String> hardware=new HashMap<>();
-			hardware.put("hard", "test");
-			mobile.setHardware(hardware);
-			mobile=mobileRepository.save(mobile);
-			
-		Optional<Mobile> mobile2=	mobileRepository.findById(mobile.getId());
-			
+			ResponseEntity<List<Device>> response= restTemplate.exchange("http://api.myjson.com/bins/1f2r2v?pretty=true",HttpMethod.GET,null, new ParameterizedTypeReference<List<Device>>() {});
+			deviceRepository.saveAll(response.getBody());
 		};
 	}
 }

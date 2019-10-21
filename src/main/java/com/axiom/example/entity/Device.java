@@ -1,25 +1,37 @@
 package com.axiom.example.entity;
 
+import java.io.Serializable;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Mobile {
+public class Device implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Long id;
 	private String brand;
 	private String phone;
 	private URL picture;
-	private Map<String, String> release = new HashMap<>();
 	private String sim;
 	private String resolution;
-	private Map<String, String> hardware = new HashMap<>();
+	private Release release;
+	private Hardware hardware;
 
+	public Device() {
+		
+	}
+	
+	public Device(Hardware hardware,Release release) {
+		this.hardware=hardware;
+		this.release=release;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -52,14 +64,6 @@ public class Mobile {
 		this.picture = picture;
 	}
 
-	public Map<String, String> getRelease() {
-		return release;
-	}
-
-	public void setRelease(Map<String, String> release) {
-		this.release = release;
-	}
-
 	public String getSim() {
 		return sim;
 	}
@@ -76,13 +80,36 @@ public class Mobile {
 		this.resolution = resolution;
 	}
 
-	public Map<String, String> getHardware() {
+	public Release getRelease() {
+		return release;
+	}
+
+	public void setRelease(Release release) {
+		this.release = release;
+	}
+
+	public Hardware getHardware() {
 		return hardware;
 	}
 
-	public void setHardware(Map<String, String> hardware) {
+	public void setHardware(Hardware hardware) {
 		this.hardware = hardware;
 	}
 
-	
+	//	public Map<String, String> getHardware() {
+	//		return hardware;
+	//	}
+	//
+	//	public void setHardware(Map<String, String> hardware) {
+	//		this.hardware = hardware;
+	//	}
+	//
+	//	public Map<String, String> getRelease() {
+	//		return release;
+	//	}
+	//
+	//	public void setRelease(Map<String, String> release) {
+	//		this.release = release;
+	//	}
+
 }
