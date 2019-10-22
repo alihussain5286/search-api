@@ -25,27 +25,27 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 @SpringBootApplication
 public class SearchApiApplication {
-	
-	private static final Logger logger= LoggerFactory.getLogger(SearchApiApplication.class);
+
+	private static final Logger logger = LoggerFactory.getLogger(SearchApiApplication.class);
 
 	@Autowired
 	private DeviceRepository deviceRepository;
-	
+
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Value("${devices.rest.api}")
 	private String deviceApi;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(SearchApiApplication.class, args);
 	}
-	
+
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
-	
+
 	@Bean
 	public ObjectMapper objectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -54,12 +54,14 @@ public class SearchApiApplication {
 		mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);
 		return mapper;
 	}
-	
+
 	@Bean
 	InitializingBean sendDatabase() {
-		return () ->{
+		return () -> {
 			logger.info("Calling RestApi to get Devices List");
-			ResponseEntity<List<Device>> response= restTemplate.exchange(deviceApi,HttpMethod.GET,null, new ParameterizedTypeReference<List<Device>>() {});
+			ResponseEntity<List<Device>> response = restTemplate.exchange(deviceApi, HttpMethod.GET, null,
+					new ParameterizedTypeReference<List<Device>>() {
+					});
 			deviceRepository.saveAll(response.getBody());
 			logger.info("Device List loaded in DB");
 		};

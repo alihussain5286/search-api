@@ -22,25 +22,26 @@ import com.axiom.example.util.ErrorConstants;
 @Service
 public class DeviceSearchServiceImpl implements SearchService {
 
-	private static final Logger logger= LoggerFactory.getLogger(DeviceSearchServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(DeviceSearchServiceImpl.class);
 
 	@Autowired
 	private DeviceRepository deviceRepository;
-	
+
 	@Autowired
 	private CustomBeanMappingService customBeanMappingService;
 
 	@Override
-	public <T> Object getAvailableDevice(Map<String, String> requestKeys,T t) throws ApiException {
+	public <T> Object getAvailableDevice(Map<String, String> requestKeys, T t) throws ApiException {
 		Response response = new Response();
 		logger.info("<----------------Enter getAvailableDevice|DeviceSearchServiceImpl---------------->");
 		try {
-			Device device=(Device) customBeanMappingService.prepareObjectForSearch(requestKeys,t);
-			List<Device> deviceList=deviceRepository.findAll(Example.of(device,ExampleMatcher.matchingAll().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)));
+			Device device = (Device) customBeanMappingService.prepareObjectForSearch(requestKeys, t);
+			List<Device> deviceList = deviceRepository.findAll(Example.of(device, ExampleMatcher.matchingAll()
+					.withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)));
 			response.setStatus(Constants.SUCCESS_STATUS);
 			response.setDevices(deviceList);
-		}catch (Exception e) {
-			logger.error("Exception in DeviceSearchServiceImpl|getAvailableDevice:{}",e);
+		} catch (Exception e) {
+			logger.error("Exception in DeviceSearchServiceImpl|getAvailableDevice:{}", e);
 			throw new ApiException(ErrorConstants.INTERNAL_ERROR);
 		}
 		logger.info("<----------------Exit getAvailableDevice|DeviceSearchServiceImpl---------------->");

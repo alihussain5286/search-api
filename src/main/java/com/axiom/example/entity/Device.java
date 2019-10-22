@@ -25,13 +25,14 @@ public class Device implements Serializable {
 	private Hardware hardware;
 
 	public Device() {
-		
+
 	}
-	
-	public Device(Hardware hardware,Release release) {
-		this.hardware=hardware;
-		this.release=release;
+
+	public Device(Hardware hardware, Release release) {
+		this.hardware = hardware;
+		this.release = release;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -97,7 +98,7 @@ public class Device implements Serializable {
 	}
 
 	public static Device getFullObjectInstance() {
-		return new Device(new Hardware(),new Release());
+		return new Device(new Hardware(), new Release());
 	}
 
 }

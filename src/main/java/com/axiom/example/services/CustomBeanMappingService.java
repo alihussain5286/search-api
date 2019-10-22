@@ -14,5 +14,5 @@ import com.axiom.example.exception.ApiException;
 @FunctionalInterface
 public interface CustomBeanMappingService {
 
-	public <T> T prepareObjectForSearch(Map<String,String> requestedKeys,T t) throws ApiException;
+	public <T> T prepareObjectForSearch(Map<String, String> requestedKeys, T t) throws ApiException;
 }

@@ -24,8 +24,9 @@ public class SearchController {
 	private SearchService searchService;
 
 	@GetMapping(Constants.SEARCH_API_URL)
-	public Response searchMobile(HttpServletRequest request, @RequestParam Map<String, String> search) throws ApiException {
-		//To make Search Service Generic we will pass Device object from controller
-		return (Response) searchService.getAvailableDevice(search,Device.getFullObjectInstance());
+	public Response searchMobile(HttpServletRequest request, @RequestParam Map<String, String> search)
+			throws ApiException {
+		// To make Search Service Generic we will pass Device object from controller
+		return (Response) searchService.getAvailableDevice(search, Device.getFullObjectInstance());
 	}
 }
