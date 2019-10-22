@@ -17,7 +17,7 @@ import com.axiom.example.services.SearchService;
 import com.axiom.example.util.Constants;
 
 @RestController
-@RequestMapping(Constants.DEVICE_API_URL)
+@RequestMapping(Constants.MOBILE_API_URL)
 public class SearchController {
 
 	@Autowired

@@ -35,7 +35,7 @@ public class SearchApiControllerTest extends SearchApiApplicationTest {
 	@BeforeEach
 	public void beforeEachTest() {
 		uriComponentsBuilder = UriComponentsBuilder
-				.fromHttpUrl(new StringBuilder("http://localhost:").append(port).append("/device/search").toString());
+				.fromHttpUrl(new StringBuilder("http://localhost:").append(port).append("/mobile/search").toString());
 	}
 
 	@AfterEach
