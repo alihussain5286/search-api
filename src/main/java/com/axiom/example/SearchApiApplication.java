@@ -15,6 +15,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.zalando.logbook.Logbook;
 
 import com.axiom.example.entity.Device;
 import com.axiom.example.repository.DeviceRepository;
@@ -44,6 +45,11 @@ public class SearchApiApplication {
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
+	}
+	
+	@Bean
+	public Logbook logBook() {
+		return Logbook.create();
 	}
 
 	@Bean

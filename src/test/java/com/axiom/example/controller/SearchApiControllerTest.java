@@ -80,6 +80,18 @@ public class SearchApiControllerTest extends SearchApiApplicationTest {
 	}
 
 	@Test
+	@DisplayName("Test audioJack=Yes")
+	public void getAllDevicesForAudioJack() {
+		uriComponentsBuilder.queryParam("audioJack", "yes");
+		ResponseEntity<Response> responseEntity = restTemplate.getForEntity(uriComponentsBuilder.toUriString(),
+				Response.class);
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		Response response = responseEntity.getBody();
+		assertEquals(Constants.SUCCESS_STATUS, response.getStatus());
+		assertEquals(36, response.getDevices().size());
+	}
+	
+	@Test
 	@DisplayName("Test For All Device")
 	public void getAllDevices() {
 		ResponseEntity<Response> responseEntity = restTemplate.getForEntity(uriComponentsBuilder.toUriString(),
