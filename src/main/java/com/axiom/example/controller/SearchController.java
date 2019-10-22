@@ -1,6 +1,5 @@
 package com.axiom.example.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.axiom.example.entity.Device;
 import com.axiom.example.exception.ApiException;
+import com.axiom.example.model.Response;
 import com.axiom.example.services.SearchService;
+import com.axiom.example.util.Constants;
 
 @RestController
-@RequestMapping("/device")
+@RequestMapping(Constants.DEVICE_API_URL)
 public class SearchController {
 
 	@Autowired
 	private SearchService searchService;
 
-	@GetMapping("/search")
-	public List<Device> searchMobile(HttpServletRequest request, @RequestParam Map<String, String> search) throws ApiException {
-		return searchService.getAvailableDevice(search);
+	@GetMapping(Constants.SEARCH_API_URL)
+	public Response searchMobile(HttpServletRequest request, @RequestParam Map<String, String> search) throws ApiException {
+		//To make Search Service Generic we will pass Device object from controller
+		return (Response) searchService.getAvailableDevice(search,Device.getFullObjectInstance());
 	}
 }

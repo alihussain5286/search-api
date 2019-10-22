@@ -1,7 +1,5 @@
 package com.axiom.example.exception;
 
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class ApiExceptionHandler {
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public Object handleException(Exception exception) {
         LOGGER.error("Exception thrown: ", exception);
-        return new Error(ErrorConstants.INTERNAL_ERROR, messageSource.getMessage(ErrorConstants.INTERNAL_ERROR, null, new Locale("en_Us")));
+        return new Error(ErrorConstants.INTERNAL_ERROR, messageSource.getMessage(ErrorConstants.INTERNAL_ERROR, null, LocaleContextHolder.getLocale()));
     }
 
     @ExceptionHandler({ApiException.class})

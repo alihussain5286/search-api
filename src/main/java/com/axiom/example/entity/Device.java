@@ -96,20 +96,8 @@ public class Device implements Serializable {
 		this.hardware = hardware;
 	}
 
-	//	public Map<String, String> getHardware() {
-	//		return hardware;
-	//	}
-	//
-	//	public void setHardware(Map<String, String> hardware) {
-	//		this.hardware = hardware;
-	//	}
-	//
-	//	public Map<String, String> getRelease() {
-	//		return release;
-	//	}
-	//
-	//	public void setRelease(Map<String, String> release) {
-	//		this.release = release;
-	//	}
+	public static Device getFullObjectInstance() {
+		return new Device(new Hardware(),new Release());
+	}
 
 }
