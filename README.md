@@ -5,6 +5,10 @@ Spring Boot Application for finding the mobiles based on search criteria.
 In this application we are demonstarting a simple application with search api for searching Mobiles based dynamic Search Criteria which are loaded in MongoDb
 on start of application from an external endpoint.
 
+# Sonar Qube
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alihussain5286_search-api&metric=alert_status)](https://sonarcloud.io/dashboard?id=alihussain5286_search-api)
+
 # Tools & Framwework Used:
 - Spring Boot 2.x
 - Maven 
