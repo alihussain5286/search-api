@@ -28,5 +28,5 @@ on start of application from an external endpoint.
 4. cmd from target folder : java -jar search-api-1.0.jar
 
 # Coverage Report
-<img src="images/Coverage_Report.png">
+<img src="images/Coverage_Report.JPG">
 
